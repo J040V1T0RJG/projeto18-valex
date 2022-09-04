@@ -6,8 +6,10 @@ import * as schemaMiddlewares from "../middlewares/schemaMiddlewares";
 const cardRouter = Router();
 
 cardRouter.post("/card/createCard",  schemaMiddlewares.validadeSchemaMiddleware, cardMiddlewares.validateCardType, cardFunctions.createCard);
-cardRouter.post("/card/:id/activateCard", cardFunctions.activateCard);
+cardRouter.put("/card/:id/activateCard", cardFunctions.activateCard);
 cardRouter.get("/card/:id/viewingCardBalanceAndTransactions", cardFunctions.viewingCardBalanceAndTransactions);
+cardRouter.put("/card/:id/cardLock", cardFunctions.cardLock);
+
 
 
 export default cardRouter;

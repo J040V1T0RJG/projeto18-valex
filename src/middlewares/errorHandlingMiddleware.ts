@@ -12,12 +12,16 @@ const errorHandler = async (error: any, req: Request, res: Response, next: NextF
     if (error.code === "NotFound") {
         return res.status(404).send(error.message);
     };
+    if (error.code === "NotAcceptable") {
+        return res.status(406).send(error.message);
+    };
     if (error.code === "Conflict") {
         return res.status(409).send(error.message);
     };
     if (error.code === "UnprocessableEntity") {
         return res.status(422).send(error.message);
     };
+    
     
     res.sendStatus(500); // internal server error
 };

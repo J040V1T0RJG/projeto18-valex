@@ -93,7 +93,7 @@ const checkCardCVC = async (card: any, cvc: string) => {
     const cvcDecrypt = cryptr.decrypt(card.securityCode);
 
     if (cvcDecrypt !== cvc) {
-        throw {code: "Unauthorized", message: "securityCode invalido" }
+        throw {code: "Unauthorized", message: "SecurityCode invalido" }
     };
 };
 
@@ -137,6 +137,33 @@ const balanceCard = async (id: number) => {
     return result;
 };
 
+const checkCardLock = async (isLock: boolean, card: any) => {
+    let message;
+    const blockedOrNot = (isLock === card.isBlocked);
+    
+    {isLock? message = "Cartão já está bloqueado" : message = "Cartão já está desbloqueado"};
+
+    if (blockedOrNot) {
+        throw { code: "NotAcceptable", message }
+    };
+};
+
+const checkPassword = async (password: string, card: any) => {
+    const cryptr = new Cryptr(`${process.env.SECRET_PASSWORD}`);
+    const passwordDecrypt = cryptr.decrypt(card.password);
+
+    if (passwordDecrypt !== password) {
+        throw { code: "Unauthorized", message: "Password invalido" }
+    };
+};
+
+const lockCardOrUnlock = async (id: number, card: any, isLock: boolean) => {
+    card.isBlocked = !isLock;
+    console.log("isLock: ", isLock, "card.isBlocked: ", card.isBlocked);
+
+    await cardRepository.update(id, card);
+};
+
 export {
     validateCardApiKey,
     checkRegisteredEmployee,
@@ -148,5 +175,8 @@ export {
     checkCardCVC,
     validateFormatPasswordAndEncrypts,
     activateCard,
-    balanceCard
+    balanceCard,
+    checkCardLock,
+    checkPassword,
+    lockCardOrUnlock
 };

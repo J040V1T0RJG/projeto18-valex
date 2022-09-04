@@ -37,8 +37,23 @@ const viewingCardBalanceAndTransactions = async (req: Request, res: Response) =>
     res.status(200).send(result);
 };
 
+const cardLock = async (req: Request, res: Response) => {
+    const cardId = Number(req.params.id);
+    const { password } = req.body;
+    const IWantToBlockTheCard = true;
+
+    const card = await cardService.checkIfCardIsRegistered(cardId);
+    await cardService.checkIfCardIsExpired(card);
+    await cardService.checkCardLock(IWantToBlockTheCard, card);
+    await cardService.checkPassword(password, card);
+    await cardService.lockCardOrUnlock(cardId, card, IWantToBlockTheCard);
+
+    res.sendStatus(202);
+};
+
 export {
     createCard,
     activateCard,
-    viewingCardBalanceAndTransactions
+    viewingCardBalanceAndTransactions,
+    cardLock
 };
