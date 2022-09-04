@@ -9,7 +9,6 @@ cardRouter.post("/card/createCard",  schemaMiddlewares.validadeSchemaMiddleware,
 cardRouter.put("/card/:id/activateCard", cardFunctions.activateCard);
 cardRouter.get("/card/:id/viewingCardBalanceAndTransactions", cardFunctions.viewingCardBalanceAndTransactions);
 cardRouter.put("/card/:id/cardLock", cardFunctions.cardLock);
-
-
+cardRouter.put("/card/:id/cardUnlock", cardFunctions.cardUnlock);
 
 export default cardRouter;

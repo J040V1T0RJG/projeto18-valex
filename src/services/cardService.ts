@@ -158,7 +158,7 @@ const checkPassword = async (password: string, card: any) => {
 };
 
 const lockCardOrUnlock = async (id: number, card: any, isLock: boolean) => {
-    card.isBlocked = !isLock;
+    card.isBlocked = isLock;
     console.log("isLock: ", isLock, "card.isBlocked: ", card.isBlocked);
 
     await cardRepository.update(id, card);
