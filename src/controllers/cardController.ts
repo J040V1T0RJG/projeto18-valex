@@ -28,7 +28,17 @@ const activateCard = async (req: Request, res: Response) => {
     res.sendStatus(202);
 };
 
+const viewingCardBalanceAndTransactions = async (req: Request, res: Response) => {
+    const cardId = Number(req.params.id);
+
+    const card = await cardService.checkIfCardIsRegistered(cardId);
+    const result = await cardService.balanceCard(cardId);
+
+    res.status(200).send(result);
+};
+
 export {
     createCard,
-    activateCard
+    activateCard,
+    viewingCardBalanceAndTransactions
 };

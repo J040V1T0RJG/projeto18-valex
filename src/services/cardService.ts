@@ -1,4 +1,6 @@
-import * as cardRepository from "../repositories/cardRepository"
+import * as cardRepository from "../repositories/cardRepository";
+import * as paymentRepository from "../repositories/paymentRepository";
+import * as rechargeRepository from "../repositories/rechargeRepository";
 import { faker } from "@faker-js/faker";
 import { formatEmployeeName } from "../utils/formatEmployeeName";
 import { dateHasAlreadyExpired } from "../utils/compareDates";
@@ -114,6 +116,27 @@ const activateCard = async (id: number, card: any, passwordEncrypt: string) => {
     await cardRepository.update(id, card);
 };
 
+const balanceCard = async (id: number) => {
+    let amount = 0;
+    const payments = await paymentRepository.findByCardId(id);
+    const recharges = await rechargeRepository.findByCardId(id);
+
+    payments.map((payment) => {
+        amount -= payment.amount
+    });
+    recharges.map((recharge) => {
+        amount += recharge.amount
+    });
+
+    const result = {
+        balance: amount,
+        transactions: payments,
+        recharges: recharges
+    };
+
+    return result;
+};
+
 export {
     validateCardApiKey,
     checkRegisteredEmployee,
@@ -124,5 +147,6 @@ export {
     checkIfCardIsActivated,
     checkCardCVC,
     validateFormatPasswordAndEncrypts,
-    activateCard
+    activateCard,
+    balanceCard
 };
