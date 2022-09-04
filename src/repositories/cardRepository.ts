@@ -1,5 +1,5 @@
 import { connection } from "../database/database";
-//import { mapObjectToUpdateQuery } from "../utils/sqlUtils";
+import { mapObjectToUpdateQuery } from "../utils/sqlUtils";
 
 export type TransactionTypes =
   | "groceries"
@@ -101,7 +101,7 @@ export async function insert(cardData: CardInsertData) {
     ]
   );
 }
-/* error no type object
+
 export async function update(id: number, cardData: CardUpdateData) {
   const { objectColumns: cardColumns, objectValues: cardValues } =
     mapObjectToUpdateQuery({
@@ -118,7 +118,7 @@ export async function update(id: number, cardData: CardUpdateData) {
     [id, ...cardValues]
   );
 }
-*/
+
 export async function remove(id: number) {
   connection.query<any, [number]>("DELETE FROM cards WHERE id=$1", [id]);
 }

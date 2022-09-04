@@ -6,7 +6,7 @@ const validadeSchemaMiddleware = (req: Request, res: Response, next: NextFunctio
     const { error } = schemas.validateCreateCardBody.validate(body, { abortEarly: false });
 
     if (error) {
-        throw {code: "UnprocessableEntity", message: "Campos 'cpf' e 'type' necessarios"}
+        throw {code: "UnprocessableEntity", message: "Campos 'cpf' e/ou 'type' invalido"}
     };
 
     next();

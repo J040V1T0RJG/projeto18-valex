@@ -5,6 +5,11 @@ const validateCreateCardBody = joi.object({
     type: joi.string().required()
 });
 
+const validateFormatPassword = joi.object({
+    password: joi.string().length(4).pattern(/^[0-9]+$/)
+})
+
 export {
-    validateCreateCardBody
+    validateCreateCardBody,
+    validateFormatPassword
 }
