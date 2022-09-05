@@ -1,9 +1,9 @@
 import { Router } from "express";
-import * as posPurchaseFunctions from "../controllers/posPurchaseController";
+import * as posPurchaseController from "../controllers/posPurchaseController";
 import * as schemaMiddlewares from "../middlewares/schemaMiddlewares";
 
 const posPurchaseRouter = Router();
 
-posPurchaseRouter.post("/posPurchase/:id", schemaMiddlewares.validadePosPurchase, posPurchaseFunctions.posPurchase);
+posPurchaseRouter.post("/posPurchase/:cardId", schemaMiddlewares.validadePosPurchase, posPurchaseController.posPurchase);
 
 export default posPurchaseRouter;

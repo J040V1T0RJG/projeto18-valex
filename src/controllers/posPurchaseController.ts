@@ -4,7 +4,7 @@ import * as rechargeService from "../services/rechargeService";
 import * as posPurchageService from "../services/posPurchageService";
 
 const posPurchase = async (req: Request, res: Response) => {
-    const cardId = Number(req.params.id);
+    const cardId = Number(req.params.cardId);
     const { password, businessId, amount } = req.body;
     const paymentData = { cardId, businessId, amount };
 

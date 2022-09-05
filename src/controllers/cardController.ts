@@ -16,7 +16,7 @@ const createCard = async (req: Request, res: Response) => {
 
 const activateCard = async (req: Request, res: Response) => {
     const { cvc, password } = req.body;
-    const cardId = Number(req.params.id);
+    const cardId = Number(req.params.cardId);
 
     const card = await cardService.checkIfCardIsRegistered(cardId);
     await cardService.checkIfCardIsExpired(card);
@@ -29,7 +29,7 @@ const activateCard = async (req: Request, res: Response) => {
 };
 
 const viewingCardBalanceAndTransactions = async (req: Request, res: Response) => {
-    const cardId = Number(req.params.id);
+    const cardId = Number(req.params.cardId);
 
     const card = await cardService.checkIfCardIsRegistered(cardId);
     const result = await cardService.balanceCard(cardId);
@@ -38,7 +38,7 @@ const viewingCardBalanceAndTransactions = async (req: Request, res: Response) =>
 };
 
 const cardLock = async (req: Request, res: Response) => {
-    const cardId = Number(req.params.id);
+    const cardId = Number(req.params.cardId);
     const { password } = req.body;
     const IWantToBlockTheCard = true;
 
@@ -52,7 +52,7 @@ const cardLock = async (req: Request, res: Response) => {
 };
 
 const cardUnlock = async (req: Request, res: Response) => {
-    const cardId = Number(req.params.id);
+    const cardId = Number(req.params.cardId);
     const { password } = req.body;
     const IWantToBlockTheCard = false;
 
