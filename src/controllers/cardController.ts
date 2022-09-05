@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as cardService from "../services/cardService"
+import * as cardService from "../services/cardService";
 
 
 const createCard = async (req: Request, res: Response) => {
