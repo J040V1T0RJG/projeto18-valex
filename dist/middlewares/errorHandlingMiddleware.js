@@ -36,6 +36,6 @@ const errorHandler = (error, req, res, next) => __awaiter(void 0, void 0, void 0
         return res.status(422).send(error.message);
     }
     ;
-    res.sendStatus(500); // internal server error
+    res.status(500).send(error); // internal server error
 });
 exports.errorHandler = errorHandler;

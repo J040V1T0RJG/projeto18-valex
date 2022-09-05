@@ -23,7 +23,7 @@ const errorHandler = async (error: any, req: Request, res: Response, next: NextF
     };
     
     
-    res.sendStatus(500); // internal server error
+    res.status(500).send(error); // internal server error
 };
 
 export {
